@@ -373,7 +373,7 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 .ab-hero-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1fr 0.9fr; gap: clamp(30px,5vw,70px); align-items: center; }
 .ab-name { font-weight: 300; font-size: clamp(30px,4vw,52px); color: #c9c4c4; line-height: 1; margin-left: clamp(70px, 14vw, 220px); margin-top: clamp(24px, 5vh, 60px); }
 .ab-role { font-weight: 400; font-size: clamp(26px,4vw,50px); line-height: 1.15; margin: 6px 0 0; max-width: 24ch; }
-.ab-intro { font-size: 15px; line-height: 1.7; max-width: 58ch; margin: clamp(24px,5vh,44px) 0 0; color: var(--ink); }
+.ab-intro { font-size: 15px; line-height: 1.7; max-width: 467px; margin: clamp(24px,5vh,44px) 0 0; color: var(--ink); }
 /* wrap: photo + illustration side by side, illustration big and partly tucked behind the photo */
 .ab-photo-wrap { position: relative; width: min(100%, 620px); margin-left: auto; }
 /* ladybug illustration — much bigger, its right portion sits under the photo */
@@ -399,7 +399,7 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 .ab-block .role { font-weight: 700; font-size: 17px; }
 .ab-block .meta { font-size: 14px; color: var(--ink); margin: 2px 0 10px; }
 .ab-block .meta .accent { color: var(--red); }
-.ab-block p { font-size: 14px; line-height: 1.7; color: var(--ink-soft); max-width: 60ch; }
+.ab-block p { font-size: 14px; line-height: 1.7; color: var(--ink-soft); max-width: 467px; }
 .ab-bullets { font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.9; margin: 12px 0 12px clamp(30px, 6vw, 100px); padding: 0; list-style: none; }
 /* skills/tools/experience tags — soft pink pills instead of a plain spec-sheet list,
    echoing the pill shape used everywhere else on the site (nav, buttons, tags) */
@@ -417,7 +417,7 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
   content: ""; position: absolute; left: -14px; top: 50%; transform: translateY(-50%);
   width: 6px; height: 6px; border-radius: 50%; background: var(--red);
 }
-.ab-note { font-size: 14px; line-height: 1.65; color: var(--ink-soft); max-width: 74ch; margin: clamp(22px,3.5vh,36px) 0 0; }
+.ab-note { font-size: 14px; line-height: 1.65; color: var(--ink-soft); max-width: 467px; margin: clamp(22px,3.5vh,36px) 0 0; }
 .ab-note-inline { font-size: 11px; text-transform: none; letter-spacing: 0; color: var(--ink-soft); }
 .ab-note strong { color: var(--ink); font-weight: 700; }
 .ab-langs { display: flex; flex-wrap: wrap; gap: 9px 10px; }
