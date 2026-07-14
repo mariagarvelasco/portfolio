@@ -384,6 +384,8 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 .ab-avail { display: inline-flex; align-items: center; gap: 9px; margin-top: 22px; font-size: 13px; color: var(--ink-soft); }
 .ab-avail .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
 .ab-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 40px; }
+.ab-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.ab-subhead { font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-soft); margin: 0 0 10px; }
 .ab-list { font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.9; margin: 0; padding: 0; list-style: none; }
 .ab-list.normal { text-transform: none; }
 .ab-block + .ab-block { margin-top: clamp(24px,4vh,42px); }
@@ -421,8 +423,10 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 
 /* ===== personal note — bigger, quieter closing statement before the footer ===== */
 .ab-personal { padding-top: clamp(50px,9vh,110px); padding-bottom: clamp(50px,9vh,110px); }
+.ab-personal-title { font-weight: 700; font-size: clamp(24px, 3.4vw, 40px); line-height: 1.15; color: var(--ink); margin: 0 0 16px; max-width: 20ch; }
 .ab-personal-text { font-size: clamp(20px, 2.2vw, 30px); line-height: 1.55; max-width: 66ch; color: var(--ink); font-weight: 400; position: relative; }
 .ab-personal-text .accent { font-weight: 600; }
+.ab-credit { margin: clamp(28px,4vh,48px) 0 0; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
 /* big quote mark fills the label column that would otherwise sit empty */
 .ab-personal-mark::before {
   content: "“"; display: block; font-size: clamp(64px, 8vw, 112px); line-height: 1;
