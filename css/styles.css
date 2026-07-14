@@ -344,8 +344,15 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
   transition: background 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
 }
 .contact-btn:hover { background: var(--red); color: #fff; transform: translateY(-3px); }
-.contact-mail, .contact-tel { display: block; margin-top: 12px; font-size: 14px; color: var(--red); text-align: right; }
-.contact-mail { margin-top: 18px; }
+.contact-icons { display: flex; justify-content: flex-end; gap: 14px; margin-top: 18px; }
+.contact-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; border-radius: 50%; flex: 0 0 auto;
+  border: 1.5px solid var(--red); color: var(--red);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.contact-icon svg { width: 17px; height: 17px; }
+.contact-icon:hover { background: var(--red); color: #fff; transform: translateY(-3px); }
 .contact-foot {
   position: relative; z-index: 2; max-width: var(--maxw); margin: clamp(50px,9vh,110px) auto 0;
   padding-top: 18px; border-top: 1px solid rgba(0,0,0,0.15);
@@ -366,7 +373,7 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 .ab-hero-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1fr 0.9fr; gap: clamp(30px,5vw,70px); align-items: center; }
 .ab-name { font-weight: 300; font-size: clamp(30px,4vw,52px); color: #c9c4c4; line-height: 1; margin-left: clamp(70px, 14vw, 220px); margin-top: clamp(24px, 5vh, 60px); }
 .ab-role { font-weight: 400; font-size: clamp(26px,4vw,50px); line-height: 1.15; margin: 6px 0 0; max-width: 24ch; }
-.ab-intro { font-size: 15px; line-height: 1.7; max-width: 42ch; margin: clamp(24px,5vh,44px) 0 0; color: var(--ink); }
+.ab-intro { font-size: 15px; line-height: 1.7; max-width: 58ch; margin: clamp(24px,5vh,44px) 0 0; color: var(--ink); }
 /* wrap: photo + illustration side by side, illustration big and partly tucked behind the photo */
 .ab-photo-wrap { position: relative; width: min(100%, 620px); margin-left: auto; }
 /* ladybug illustration — much bigger, its right portion sits under the photo */
@@ -410,7 +417,7 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
   content: ""; position: absolute; left: -14px; top: 50%; transform: translateY(-50%);
   width: 6px; height: 6px; border-radius: 50%; background: var(--red);
 }
-.ab-note { font-size: 14px; line-height: 1.65; color: var(--ink-soft); max-width: 54ch; margin: clamp(22px,3.5vh,36px) 0 0; }
+.ab-note { font-size: 14px; line-height: 1.65; color: var(--ink-soft); max-width: 74ch; margin: clamp(22px,3.5vh,36px) 0 0; }
 .ab-note-inline { font-size: 11px; text-transform: none; letter-spacing: 0; color: var(--ink-soft); }
 .ab-note strong { color: var(--ink); font-weight: 700; }
 .ab-langs { display: flex; flex-wrap: wrap; gap: 9px 10px; }
@@ -504,7 +511,8 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 
   .contact-inner { grid-template-columns: 1fr; grid-template-areas: "title" "sub" "cta"; }
   .contact-sub { padding-left: 0; }
-  .contact-cta, .contact-mail, .contact-tel { text-align: left; }
+  .contact-cta { text-align: left; }
+  .contact-icons { justify-content: flex-start; }
 
   .project { display: block; }
   .project-cap { margin-top: 16px; }
