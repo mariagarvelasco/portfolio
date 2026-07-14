@@ -494,4 +494,30 @@
 
   const y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
+
+  /* ---- cookie consent — analytics stays anonymous/cookieless (Google Consent
+     Mode default) until the visitor accepts; the choice is remembered so the
+     banner only shows once. ---- */
+  const cookieBanner = document.getElementById("cookieBanner");
+  if (cookieBanner) {
+    const CONSENT_KEY = "cookie-consent";
+    const updateConsent = (granted) => {
+      if (typeof window.gtag === "function") {
+        window.gtag("consent", "update", { analytics_storage: granted ? "granted" : "denied" });
+      }
+    };
+    const saved = localStorage.getItem(CONSENT_KEY);
+    if (saved) {
+      updateConsent(saved === "granted");
+    } else {
+      cookieBanner.classList.add("show");
+      const respond = (granted) => {
+        localStorage.setItem(CONSENT_KEY, granted ? "granted" : "denied");
+        updateConsent(granted);
+        cookieBanner.classList.remove("show");
+      };
+      document.getElementById("cookieAccept").addEventListener("click", () => respond(true));
+      document.getElementById("cookieReject").addEventListener("click", () => respond(false));
+    }
+  }
 })();
