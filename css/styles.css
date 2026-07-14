@@ -1,0 +1,665 @@
+/* =========================================================
+   maría — graphic designer · portfolio
+   Palette: pink #FFE6EE · gray #F2F0F0 · red #DC2F15 · white #FFF
+   Type: Anaheim (everything)
+   ========================================================= */
+
+:root {
+  --pink:  #FFE6EE;
+  --gray:  #F2F0F0;
+  --red:   #DC2F15;
+  --white: #FFFFFF;
+  --ink:   #141414;
+  --ink-soft: #5c5c5c;
+
+  --maxw: 1320px;
+  --gut: clamp(20px, 4.5vw, 76px);
+
+  --font: "Anaheim", "Helvetica Neue", Arial, sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* red round cursor (standard size) */
+  --cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Ccircle cx='13' cy='13' r='8' fill='%23DC2F15'/%3E%3C/svg%3E") 13 13;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; min-height: 100%; cursor: var(--cursor), auto; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  cursor: var(--cursor), auto;
+}
+/* red round cursor everywhere */
+a, button, .contact-btn, .nav a, [role="button"], input, textarea, label {
+  cursor: var(--cursor), pointer;
+}
+
+/* subtle grain */
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  opacity: 0.04; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--red); color: #fff; }
+
+h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin: 0; }
+.accent { color: var(--red); }
+
+.eyebrow {
+  text-transform: uppercase; letter-spacing: 0.22em;
+  font-size: 11px; color: var(--ink-soft); margin: 0 0 1.2rem;
+}
+
+/* reveal */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); will-change: opacity, transform; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: flex-end;
+  padding: 16px var(--gut);
+}
+/* nav items stay put everywhere — only the backdrop behind them fades in/out */
+/* tight soft glow right behind the nav — strong right at the top,
+   gone within a short distance (no spread-out blurred band). */
+.header-blur { position: absolute; left: 0; right: 0; top: 0; bottom: -18px; z-index: -1; pointer-events: none; opacity: 0; transition: opacity 0.4s var(--ease); }
+.site-header.scrolled .header-blur,
+.talk-page .site-header .header-blur { opacity: 1; }
+.header-blur span { position: absolute; inset: 0; }
+.header-blur span:nth-child(1) {
+  backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 20%, transparent 45%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 20%, transparent 45%);
+}
+.header-blur span:nth-child(2) {
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 18%, transparent 70%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 18%, transparent 70%);
+}
+.header-blur span:nth-child(3) {
+  backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 16%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 16%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(255,255,255,0) 50%);
+}
+
+.nav { display: flex; align-items: center; gap: 22px; }
+.nav a { font-size: 13px; letter-spacing: 0.02em; color: var(--ink); position: relative; }
+.nav a::after { content: ""; position: absolute; left: 0; bottom: -3px; width: 100%; height: 1px; background: var(--red); transform: scaleX(0); transform-origin: right; transition: transform 0.4s var(--ease); }
+.nav a:hover { color: var(--red); }
+.nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+.nav-cta { padding: 6px 14px; border: 1px solid var(--ink); border-radius: 40px; }
+.nav-cta::after { display: none; }
+.nav-cta:hover { border-color: var(--red); }
+
+/* =========================================================
+   1. HERO
+   ========================================================= */
+.hero { position: relative; min-height: 100svh; background: var(--pink); overflow: hidden; display: flex; align-items: center; }
+.hero-trail { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.trail-ghost { position: absolute; will-change: transform, opacity; opacity: 0; pointer-events: none; transform-origin: center; filter: blur(13px); }
+.trail-ghost img { width: 100%; height: auto; display: block; }
+
+/* ambient mave background (parallax) */
+.hero-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.hero-bgm { position: absolute; will-change: transform; }
+.hero-bgm img { width: 100%; display: block; }
+
+/* centered editorial cover */
+.hero-center { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: clamp(12px, 2vh, 26px); width: 100%; }
+.hero-eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); margin: 0; }
+.hero-logo {
+  width: min(78vw, 1040px);
+  transform: rotate(-3deg);
+  pointer-events: none;
+  will-change: transform;
+}
+.hero-logo img { width: 100%; }
+.hero-tagline { max-width: 48ch; text-align: center; font-size: clamp(15px, 1.5vw, 21px); line-height: 1.5; color: var(--ink); margin: 0; }
+.hero-tags { display: flex; gap: 0; flex-wrap: wrap; justify-content: center; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0; }
+.hero-tags span:not(:last-child)::after { content: "·"; margin: 0 14px; opacity: 0.55; }
+.hero-scroll:hover { color: var(--red); }
+
+.hero-hint, .hero-scroll {
+  position: absolute; z-index: 3; font-size: 11px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--ink); opacity: 0.6;
+}
+.hero-hint { left: var(--gut); bottom: 30px; }
+.hero-scroll { right: var(--gut); bottom: 30px; animation: bob 2.4s var(--ease) infinite; }
+
+/* editorial "business-card" metadata at the mid edges */
+.hero-meta { position: absolute; z-index: 3; top: 50%; transform: translateY(-50%); font-size: 13px; line-height: 1.4; color: var(--ink); }
+.hero-ml { left: var(--gut); }
+.hero-mr { right: var(--gut); text-align: right; }
+.hm-k { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 7px; }
+.hm-sub { color: var(--ink-soft); }
+@media (max-width: 900px) { .hero-meta { display: none; } }
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+/* =========================================================
+   2. ABOUT (Hi! intro) — matches reference
+   ========================================================= */
+.about { background: var(--white); padding: clamp(80px,12vh,150px) var(--gut) clamp(20px,3vh,40px); }
+.about-grid { position: relative; max-width: var(--maxw); margin: 0 auto; min-height: clamp(460px, 58vh, 600px); }
+.about-left { position: relative; z-index: 3; max-width: 62%; }
+.about-hi {
+  font-weight: 400; font-size: clamp(26px, 3.4vw, 48px);
+  margin: 0 0 4px; margin-left: clamp(80px, 52%, 540px);
+  white-space: nowrap;
+  color: #bdb6b6;   /* "Hi! I'm" in gray */
+}
+/* "Maria" — static light red, snaps bold on hover, links to About */
+.about-hi .accent { color: var(--red); font-weight: 300; display: inline-block; transition: transform 0.3s var(--ease); }
+.about-hi .accent:hover { font-weight: 700; }
+.about-hi .accent:active { transform: scale(0.9) rotate(-2deg); }
+.about-lead {
+  font-weight: 400; font-size: clamp(30px, 5vw, 70px); line-height: 1.03;
+  letter-spacing: -0.01em; max-width: 22ch; margin: 0;
+  position: relative; z-index: 3;
+}
+.about-contact { margin-top: clamp(20px, 4vh, 40px); font-size: 14px; line-height: 1.7; }
+.about-contact a { display: block; width: fit-content; color: var(--red); }
+.about-contact a:hover { text-decoration: underline; }
+
+.about-right {
+  position: absolute; top: clamp(90px, 12vh, 165px);
+  left: clamp(250px, 42%, 640px);
+  width: min(56vw, 730px); z-index: 1; text-align: right;
+}
+.about-photo { width: 100%; }
+.about-photo img { width: 100%; mix-blend-mode: multiply; }   /* keep real colours (pink glasses) */
+.about-current { position: relative; z-index: 3; margin-top: 8px; font-size: 15px; line-height: 1.5; }
+.about-current a { color: #b9b3b3; }
+.about-current a:hover { color: var(--red); }
+
+/* =========================================================
+   3. A QUICK LOOK — smaller, less whitespace, pans right
+   ========================================================= */
+.strip { position: relative; background: var(--white); height: 220vh; }
+.strip-sticky {
+  position: sticky; top: 0; height: 100svh;
+  display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden;
+  padding: clamp(64px, 8vh, 92px) 0 clamp(28px, 4vh, 56px);
+}
+.strip-lead { margin: 0 0 clamp(42px, 6.5vh, 88px) var(--gut); z-index: 4; }
+.strip-lead h3 { font-size: clamp(30px, 4.2vw, 64px); font-weight: 400; }
+.strip-lead h3 .accent { color: #E3ACBD; }   /* "look" in pink */
+.strip-lead p { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); margin-top: 10px; }
+
+.strip-track { display: flex; align-items: flex-start; gap: clamp(22px, 3vw, 54px); padding: 0 var(--gut); will-change: transform; }
+.strip-item { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-start; }
+.strip-item.landscape { width: clamp(240px, 25vw, 400px); }
+.strip-item.portrait  { width: clamp(160px, 16vw, 250px); }
+.strip-card {
+  position: relative; width: 100%;
+  height: clamp(190px, 34vh, 340px);
+  background: var(--gray); overflow: hidden;
+  transition: transform 0.5s var(--ease);
+}
+.strip-card img { width: 100%; height: 100%; object-fit: cover; }
+.strip-item:hover .strip-card { transform: rotate(0deg) translateY(-5px) !important; }
+/* caption BELOW the photo, no background */
+.strip-cap {
+  margin-top: clamp(16px, 2.4vh, 26px); font-size: 11px;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft);
+}
+
+/* =========================================================
+   4. WORK — collage, tight per-project grouping
+   ========================================================= */
+.work { position: relative; background: var(--white); padding: clamp(4px,1vh,22px) var(--gut) 0; overflow: hidden; }
+.work-head { max-width: var(--maxw); margin: 0 auto clamp(36px,6vh,70px); position: relative; z-index: 3; }
+.work-head h2 { font-size: clamp(30px,4.2vw,64px); font-weight: 400; }
+.work-head h2 .accent { color: #E3ACBD; }   /* "work" in pink, not red */
+.work-head p { font-size: 13px; margin-top: 14px; color: var(--ink-soft); max-width: 42ch; }
+
+.work-fondo { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: url("../img/foto-fondo.png") center/cover no-repeat; filter: invert(1); opacity: 0.06; mix-blend-mode: multiply; }
+.work-watermarks { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.wm {
+  position: absolute;
+  transform: translateY(var(--py, 0)) rotate(var(--rot, 0deg));
+  filter: blur(6px); opacity: 0.7;
+}
+.wm img { width: 100%; }
+
+.collage { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto; }
+
+/* ONE continuous canvas mirroring the reference board 1:1 — every photo
+   and every text block keeps the exact position/size it has there (all
+   values are % of the FULL page), so projects sit exactly as close
+   together as they do on that board. */
+.work-canvas { position: relative; width: 100%; aspect-ratio: var(--ar, 0.3155); }
+.work-anchor { position: absolute; scroll-margin-top: 90px; }
+.work-gray-bg {
+  position: absolute; left: 50%; right: 50%; bottom: 0;
+  width: 100vw; margin-left: -50vw; margin-right: -50vw;
+  background: var(--gray); z-index: 0;
+}
+
+.work-piece {
+  position: absolute; display: block; margin: 0; transform: rotate(var(--r, 0deg));
+  transition: transform .5s var(--ease), filter .5s var(--ease); transform-origin: 50% 50%;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18)) drop-shadow(0 14px 22px rgba(0,0,0,0.14));
+  z-index: 1;
+}
+.work-piece img { width: 100%; height: auto; display: block; }
+.work-piece:hover { transform: rotate(0deg) scale(1.04); z-index: 5; }
+.work-piece--flat { filter: none; }
+
+/* text block — number, title, description, positioned exactly like the reference */
+.work-text {
+  position: absolute; display: flex; flex-direction: column; gap: 4px;
+  min-width: 140px; z-index: 2;
+}
+/* wrapper is invisible to layout on desktop (n/t/toggle stay the exact same
+   stacked flex children they always were) — only becomes a real row on phones */
+.work-text-head { display: contents; }
+.work-text .n { color: #E3ACBD; font-style: italic; font-weight: 500; font-size: clamp(11px, 0.85vw, 13px); letter-spacing: 0.02em; }
+.work-text .t { font-weight: 500; font-size: clamp(12px, 0.9vw, 13px); line-height: 1.1; }
+.work-text .d { color: var(--ink-soft); font-size: clamp(8.5px, 0.62vw, 9px); line-height: 1.3; }
+.work-text-toggle { display: none; }
+
+/* click a project photo to see it bigger; click anywhere (or Esc) to close */
+.lightbox {
+  position: fixed; inset: 0; z-index: 300; padding: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(20,20,20,0.85);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+}
+.lightbox.open { opacity: 1; pointer-events: auto; }
+.lightbox img {
+  max-width: 90vw; max-height: 88vh; width: auto; height: auto;
+  object-fit: contain; border-radius: 4px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+
+/* =========================================================
+   5. FOOTER / CONTACT — small & compact (matches reference)
+   ========================================================= */
+.contact { position: relative; background: var(--pink); padding: clamp(64px,10vh,120px) var(--gut) 34px; overflow: hidden; }
+/* textured background photo over the pink — visible enough to show its own colors */
+.contact::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: url("../img/textura-papel.jpg") center/cover no-repeat;
+  opacity: 0.4;
+}
+.contact-mark-wrap { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto; }
+.contact-mark { width: clamp(120px, 14vw, 200px); margin-bottom: clamp(4px, 0.8vh, 10px); }
+.contact-inner {
+  position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto;
+  display: grid; grid-template-columns: 1.3fr 1fr; grid-template-areas: "title title" "sub cta"; gap: clamp(20px,4vh,40px) 40px; align-items: end;
+}
+.contact-title {
+  grid-area: title;
+  font-weight: 400; text-transform: uppercase;
+  font-size: clamp(24px, 3.3vw, 46px); line-height: 1.06; letter-spacing: 0.01em;
+  color: var(--red); max-width: 24ch;
+}
+.contact-sub { grid-area: sub; font-size: 18px; line-height: 1.5; max-width: 46ch; color: var(--ink); align-self: start; justify-self: start; padding-left: 0; margin-left: clamp(24px, 9vw, 150px); }
+.contact-cta { grid-area: cta; text-align: right; }
+.contact-btn {
+  display: inline-block; font-size: 18px; letter-spacing: 0.02em;
+  padding: 11px 38px; border: 1.5px solid var(--red); border-radius: 50px; color: var(--red);
+  transition: background 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.contact-btn:hover { background: var(--red); color: #fff; transform: translateY(-3px); }
+.contact-mail, .contact-tel { display: block; margin-top: 12px; font-size: 14px; color: var(--red); text-align: right; }
+.contact-mail { margin-top: 18px; }
+.contact-foot {
+  position: relative; z-index: 2; max-width: var(--maxw); margin: clamp(50px,9vh,110px) auto 0;
+  padding-top: 18px; border-top: 1px solid rgba(0,0,0,0.15);
+  display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+  font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft);
+}
+
+/* =========================================================
+   ABOUT PAGE
+   ========================================================= */
+.page { background: var(--white); }
+.ab-section { padding: clamp(40px,7vh,90px) var(--gut); }
+.ab-inner { max-width: var(--maxw); margin: 0 auto; }
+.ab-gray { background: var(--gray); }
+.ab-pink { background: var(--pink); }   /* about hero background */
+
+.ab-hero { padding-top: clamp(120px,16vh,190px); padding-bottom: clamp(60px,9vh,110px); min-height: 100svh; display: grid; align-items: start; justify-items: center; }
+.ab-hero-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1fr 0.9fr; gap: clamp(30px,5vw,70px); align-items: center; }
+.ab-name { font-weight: 300; font-size: clamp(30px,4vw,52px); color: #c9c4c4; line-height: 1; margin-left: clamp(70px, 14vw, 220px); margin-top: clamp(24px, 5vh, 60px); }
+.ab-role { font-weight: 400; font-size: clamp(26px,4vw,50px); line-height: 1.15; margin: 6px 0 0; max-width: 24ch; }
+.ab-intro { font-size: 15px; line-height: 1.7; max-width: 42ch; margin: clamp(24px,5vh,44px) 0 0; color: var(--ink); }
+/* wrap: photo + illustration side by side, illustration big and partly tucked behind the photo */
+.ab-photo-wrap { position: relative; width: min(100%, 620px); margin-left: auto; }
+/* ladybug illustration — much bigger, its right portion sits under the photo */
+.ab-illustration { position: absolute; z-index: 0; top: 74%; left: 42%; width: 92%; max-width: none; opacity: 1; pointer-events: none; }
+/* polaroid photo: full frame visible, no crop, transparent background, small + a slight tilt */
+.ab-photo { position: relative; z-index: 1; width: 52%; margin-left: auto; }
+.ab-photo img { width: 100%; height: auto; object-fit: contain; }
+/* higher specificity than .reveal.in's transform:none, so the tilt survives the reveal */
+.ab-photo.reveal.in { transform: rotate(-4deg); }
+
+.ab-row { display: grid; grid-template-columns: 1fr 2.6fr; gap: clamp(20px,4vw,60px); align-items: start; }
+.ab-head { display: flex; align-items: baseline; gap: 12px; }
+.ab-num { color: var(--red); font-size: 12px; letter-spacing: 0.14em; flex: 0 0 auto; font-style: italic; }
+.ab-h { font-weight: 600; font-size: clamp(24px,2.6vw,34px); }
+.ab-avail { display: inline-flex; align-items: center; gap: 9px; margin-top: 22px; font-size: 13px; color: var(--ink-soft); }
+.ab-avail .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+.ab-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 40px; }
+.ab-list { font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.9; margin: 0; padding: 0; list-style: none; }
+.ab-list.normal { text-transform: none; }
+.ab-block + .ab-block { margin-top: clamp(24px,4vh,42px); }
+.ab-block .role { font-weight: 700; font-size: 17px; }
+.ab-block .meta { font-size: 14px; color: var(--ink); margin: 2px 0 10px; }
+.ab-block .meta .accent { color: var(--red); }
+.ab-block p { font-size: 14px; line-height: 1.7; color: var(--ink-soft); max-width: 60ch; }
+.ab-bullets { font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.9; margin: 12px 0 12px clamp(30px, 6vw, 100px); padding: 0; list-style: none; }
+/* skills/tools/experience tags — soft pink pills instead of a plain spec-sheet list,
+   echoing the pill shape used everywhere else on the site (nav, buttons, tags) */
+.ab-list.chips, .ab-bullets.chips {
+  display: flex; flex-wrap: wrap; gap: 9px 10px; align-items: center;
+  margin: 12px 0 0; padding: 0; line-height: 1.3;
+}
+.ab-list.chips li, .ab-bullets.chips li {
+  padding: 7px 15px; border-radius: 40px;
+  background: rgba(255,230,238,0.55); border: 1px solid rgba(220,47,21,0.14);
+  color: var(--ink); font-size: 12px; letter-spacing: 0.04em; white-space: nowrap;
+}
+.ab-sep { border: 0; height: 1px; width: 46px; background: var(--red); opacity: 0.55; margin: 22px 0 22px 0; position: relative; }
+.ab-sep::before {
+  content: ""; position: absolute; left: -14px; top: 50%; transform: translateY(-50%);
+  width: 6px; height: 6px; border-radius: 50%; background: var(--red);
+}
+.ab-note { font-size: 14px; line-height: 1.65; color: var(--ink-soft); max-width: 54ch; margin: clamp(22px,3.5vh,36px) 0 0; }
+.ab-note-inline { font-size: 11px; text-transform: none; letter-spacing: 0; color: var(--ink-soft); }
+.ab-note strong { color: var(--ink); font-weight: 700; }
+.ab-langs { display: flex; flex-wrap: wrap; gap: 9px 10px; }
+.ab-langs .lang {
+  display: inline-flex; align-items: center; padding: 7px 15px; border-radius: 40px;
+  background: rgba(255,230,238,0.55); border: 1px solid rgba(220,47,21,0.14);
+  font-size: 12px; letter-spacing: 0.04em;
+}
+.ab-langs .lang .accent { color: var(--red); margin-left: 5px; }
+
+/* ===== personal note — bigger, quieter closing statement before the footer ===== */
+.ab-personal { padding-top: clamp(50px,9vh,110px); padding-bottom: clamp(50px,9vh,110px); }
+.ab-personal-text { font-size: clamp(20px, 2.2vw, 30px); line-height: 1.55; max-width: 66ch; color: var(--ink); font-weight: 400; position: relative; }
+.ab-personal-text .accent { font-weight: 600; }
+/* big quote mark fills the label column that would otherwise sit empty */
+.ab-personal-mark::before {
+  content: "“"; display: block; font-size: clamp(64px, 8vw, 112px); line-height: 1;
+  color: #E3ACBD; font-weight: 700;
+}
+
+/* =========================================================
+   LET'S TALK — contact page
+   ========================================================= */
+.talk { position: relative; min-height: 100svh; background: var(--white); padding: clamp(122px,16vh,176px) var(--gut) clamp(40px,6vh,70px); overflow: hidden; }
+.talk-grid { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(40px,6vw,100px); align-items: start; }
+/* full-bleed scattered dots behind the whole section */
+.talk-bg { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+
+.talk-title { font-weight: 400; font-size: clamp(42px, 6vw, 88px); line-height: 0.94; letter-spacing: -0.02em; }
+.talk-title .accent { color: #E3ACBD; }   /* "talk" in pink */
+.talk-badges { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
+.talk-tag {
+  display: inline-block; transform: rotate(-4deg);
+  border: 1.5px solid var(--red); color: var(--red); border-radius: 40px;
+  padding: 6px 16px; font-size: 12px; letter-spacing: 0.04em;
+}
+.talk-avail { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-soft); }
+.talk-avail .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+.talk-intro { font-size: 15px; line-height: 1.6; color: var(--ink-soft); max-width: 48ch; margin: clamp(16px,2.6vh,28px) 0; }
+.talk-links li::after { content: "↗"; margin-left: auto; color: var(--ink-soft); opacity: 0; transition: opacity 0.3s var(--ease), color 0.3s var(--ease); }
+.talk-links li:hover::after { opacity: 1; color: var(--red); }
+.form-send { background: var(--red); color: #fff; }
+.form-send:hover { background: #9f120e; }
+.talk-foot { position: absolute; left: var(--gut); right: var(--gut); bottom: 22px; z-index: 2; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.15); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.talk-links { list-style: none; padding: 0; margin: clamp(20px, 4vh, 40px) 0 0; }
+.talk-links li { padding: 11px 0; border-top: 1px solid rgba(0,0,0,0.14); display: flex; align-items: baseline; gap: 14px; transition: padding-left 0.3s var(--ease); }
+.talk-links li:last-child { border-bottom: 1px solid rgba(0,0,0,0.14); }
+.talk-links li:hover { padding-left: 6px; }
+.talk-links a { color: var(--ink); font-size: clamp(17px, 1.6vw, 22px); }
+.talk-links a:hover { color: var(--red); }
+.talk-links .k { width: 84px; flex: 0 0 auto; color: var(--ink-soft); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; }
+
+.form { display: grid; gap: 18px; margin-top: clamp(70px, 13.6vh, 132px); }
+.form label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-soft); margin-bottom: 6px; transition: color 0.3s var(--ease); }
+.form input, .form textarea {
+  width: 100%; font-family: var(--font); font-size: 17px; color: var(--ink);
+  background: transparent; border: none; border-bottom: 1.5px solid rgba(20,20,20,0.22);
+  border-radius: 0; padding: 10px 2px; outline: none; transition: border-color 0.3s var(--ease);
+}
+.form input::placeholder, .form textarea::placeholder { color: #b7b2b2; }
+.form input:focus, .form textarea:focus { border-bottom-color: var(--red); }
+.form > div:focus-within label, .form .row2 > div:focus-within label { color: var(--red); }
+.form textarea { resize: vertical; min-height: 96px; }
+.form .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+/* card treatment — gives the form its own quiet, tactile "paper" presence
+   instead of floating fields on bare white, echoing the site's hand-crafted feel */
+.talk-form-card {
+  position: relative; z-index: 1; margin-top: clamp(26px, 4vh, 46px);
+  background: var(--pink);
+  border: 1px solid rgba(220,47,21,0.14); border-radius: 22px;
+  padding: clamp(28px,4vw,42px) clamp(24px,4vw,38px) clamp(22px,3vw,32px);
+}
+.form-send {
+  justify-self: start; margin-top: 6px; font-family: var(--font); font-size: 16px; letter-spacing: 0.02em;
+  padding: 16px 52px; border: 1.5px solid var(--red); border-radius: 50px; color: var(--red);
+  background: none; transition: background 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.form-send:hover { background: var(--red); color: #fff; transform: translateY(-3px); }
+.form-note { font-size: 12px; color: var(--ink-soft); }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 900px) {
+  .about-grid { min-height: 0; }
+  .about-hi { margin-left: 0; }
+  .about-right { position: static; width: min(80vw,420px); margin: 26px auto 0; text-align: center; }
+  .hero-logo { margin: 0 auto; transform: rotate(-6deg); width: 78vw; }
+
+  .contact-inner { grid-template-columns: 1fr; grid-template-areas: "title" "sub" "cta"; }
+  .contact-sub { padding-left: 0; }
+  .contact-cta, .contact-mail, .contact-tel { text-align: left; }
+
+  .project { display: block; }
+  .project-cap { margin-top: 16px; }
+  .project-imgs { flex-direction: column; align-items: stretch; gap: 16px; }
+  .shot { width: 100% !important; transform: rotate(0deg) !important; margin: 0 !important; }
+
+  .ab-hero-grid { grid-template-columns: 1fr; }
+  .ab-photo-wrap { width: min(85%, 320px); margin: 0 auto; }
+  .ab-name { margin-left: 0; }
+  .ab-row { grid-template-columns: 1fr; gap: 14px; }
+  .ab-cols { grid-template-columns: 1fr; }
+  .talk-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 720px) {
+  .strip { height: auto; }
+  .strip-sticky { position: static; height: auto; display: block; padding: 40px 0; }
+  .strip-lead { position: static; margin: 0 var(--gut) 20px; }
+  .strip-track { transform: none !important; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 12px; }
+  .strip-item { scroll-snap-align: center; }
+  .hero-hint { display: none; }
+  .form .row2 { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .hero-scroll { animation: none; }
+}
+
+/* =========================================================
+   HOME INTRO — signature logo over pink polka dots
+   white top band + pink bottom band · dots span both
+   ========================================================= */
+.home {
+  position: relative; z-index: 0; isolation: isolate; overflow: hidden;
+  --home-split: 100svh;   /* full-screen cover: only the logo + photo on entry */
+  background: var(--pink);
+}
+/* top band: FondoPortada image behind the signature logo */
+.home-logo {
+  height: var(--home-split); display: flex; align-items: center; justify-content: center;
+  position: relative; padding: 0 var(--gut);
+  background: url("../img/FondoPortada.jpg") center center / cover no-repeat;
+}
+.home-logo img { width: min(44vw, 640px); height: auto; transform: translateY(7vh); will-change: transform; }
+/* pink band: Hi! block fills the whole screen, content centred, text pushed left */
+.home .about { background: transparent; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-start; padding-top: clamp(80px, 16vh, 180px); padding-left: clamp(14px, 3vw, 46px); }
+.home .about-grid { width: 100%; margin: 0; }
+/* "Hi! I'm Maria —" indented, with a grey dash */
+.home .about-hi { margin-left: clamp(40px, 26vw, 400px); }
+.home .about-hi .hi-dash { color: #bdb6b6; margin-left: 4px; }
+/* tilted white square behind the portrait */
+.home .about-photo { position: relative; }
+.home .about-photo::before {
+  content: ""; position: absolute; z-index: 0;
+  top: 1%; bottom: 3%; left: 6%; right: 3%;
+  background: #fff; transform: rotate(-5deg);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.07);
+}
+.home .about-photo img { position: relative; z-index: 1; }
+/* nav links a touch bigger */
+.nav-right a { font-size: 15px; }
+/* wider lead paragraph, nudged a little to the right (width unchanged) */
+.home .about-lead { max-width: 48vw; margin-left: clamp(18px, 3.2vw, 52px); }
+/* email + phone: same nudge (kept aligned with the lead), each in its own red pill */
+.home .about-contact { margin-left: clamp(18px, 3.2vw, 52px); display: flex; flex-direction: column; align-items: flex-start; gap: 10px; border: 0; padding: 0; }
+.home .about-contact a { display: inline-block; width: fit-content; border: 1px solid var(--red); border-radius: 22px; padding: 4px 20px; transition: background 0.3s var(--ease), color 0.3s var(--ease); }
+.home .about-contact a:hover { background: var(--red); color: #fff; text-decoration: none; }
+/* photo + white square much more to the right, a bit bigger */
+.home .about-right { left: auto; right: 0; width: min(60vw, 790px); }
+
+/* =========================================================
+   A QUICK LOOK — moodboard collage: real project photos (cutouts
+   + framed shots) scattered over a paper background, exactly like
+   a scrapbook table. No captions, no boxes — just the pieces.
+   ========================================================= */
+.qlook {
+  position: relative; overflow: hidden; padding: clamp(30px, 5vh, 56px) var(--gut);
+  background: var(--white);
+}
+.qlook-stage {
+  position: relative; width: 100%; aspect-ratio: 1265 / 738; margin: 0 auto;
+  background: url("../img/fotos-home/foto-fondo.jpg") center/cover no-repeat;
+  max-width: 1280px;
+}
+/* "View all work" — a slim vertical tab pinned to the right edge, reads sideways */
+.qlook-cta {
+  position: absolute; right: clamp(6px, 1.6vw, 22px); top: 50%;
+  transform: translateY(-50%); margin: 0; z-index: 5; display: inline-flex;
+}
+.qlook-cta .btn-pill {
+  writing-mode: vertical-rl; text-orientation: mixed;
+  display: inline-flex; align-items: center;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.03em; color: var(--red);
+  padding: 10px 2px;
+  text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 7px;
+  transition: text-decoration-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.qlook-cta .btn-pill:hover { text-decoration-color: var(--red); transform: translateX(-3px); }
+/* each project piece — a plain cutout/photo, softly shadowed, no frame */
+/* two layered shadows — a tight contact shadow + a softer ambient one — read as an object
+   actually resting on the table, rather than a flat blur floating behind it */
+.ql-item {
+  position: absolute; display: block; transform: rotate(var(--r, 0deg));
+  transition: transform .5s var(--ease), filter .5s var(--ease); transform-origin: 50% 50%;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.20)) drop-shadow(0 16px 26px rgba(0,0,0,0.16));
+}
+.ql-item img { width: 100%; height: auto; display: block; pointer-events: none; }
+.ql-item:hover {
+  transform: rotate(0deg) scale(var(--hs, 1.35)); z-index: 9;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.24)) drop-shadow(0 24px 38px rgba(0,0,0,0.22));
+}
+/* static index numbers, matching the reference board's annotations — never move or scale */
+.ql-index {
+  position: absolute; z-index: 7; color: #E3ACBD; font-size: clamp(15px, 1.6vw, 22px);
+  font-style: italic; font-weight: 500; letter-spacing: 0.02em; pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 760px) {
+  .qlook { padding: 40px var(--gut) 60px; }
+  .qlook-stage { aspect-ratio: auto; min-height: 480px; }
+  /* vertical side-tab doesn't work on narrow screens — fall back to a normal pill below the stage */
+  .qlook-cta { position: static; transform: none; width: 100%; justify-content: center; margin: clamp(20px, 3.5vh, 34px) auto 0; }
+  .qlook-cta .btn-pill { writing-mode: horizontal-tb; padding: 11px 30px; }
+  .qlook-cta .btn-pill:hover { transform: translateY(-3px); }
+}
+
+/* Projects page: clear the fixed header above the collage */
+.projects-page .work { padding-top: clamp(55px, 6vh, 85px); }
+
+/* Work page on phones only — same collage/composition as desktop (nothing about
+   position, size or text changes above this breakpoint). The only difference:
+   each project's description is collapsed behind a tap-to-read arrow, since
+   showing the full paragraph at this width is what caused text to sit on top
+   of the photos. */
+@media (max-width: 760px) {
+  /* the 140px desktop min-width overflows the viewport for items positioned
+     near the right edge at this scale — let the existing %-width govern instead */
+  .work-text { min-width: 0; max-width: calc(100vw - var(--gut)); }
+  .work-text-head { display: flex; align-items: baseline; gap: 5px; }
+  .work-text-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-left: auto; padding: 2px 4px; background: none; border: none;
+    color: var(--ink-soft); font-size: 11px; line-height: 1;
+    transition: transform 0.3s var(--ease);
+  }
+  .work-text.open .work-text-toggle { transform: rotate(180deg); }
+  .work-text .d {
+    max-height: 0; overflow: hidden; margin: 0;
+    transition: max-height 0.35s var(--ease);
+  }
+  .work-text.open {
+    z-index: 6; background: rgba(255,255,255,0.96); border-radius: 6px;
+    padding: 5px 7px; margin: -5px -7px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.16);
+  }
+  .work-text.open .d { max-height: 260px; margin-top: 2px; }
+}
+
+/* header: nav always right-aligned, no brand mark */
+.site-header .nav-right { margin-left: auto; }
+/* no red underline on the top nav hover */
+.nav-right a::after { display: none; }
+.nav-right a:hover { color: var(--red); }
+/* current page: muted, not clickable */
+.nav-right a[aria-current="page"] { color: var(--ink-soft); pointer-events: none; }
+
+/* =========================================================
+   LADYBUG — home button. Roams the cover freely, then eases
+   into a small fixed logo, top-left, once you scroll past it.
+   ========================================================= */
+.ladybug {
+  position: fixed; top: 0; left: 0; z-index: 300;
+  width: 30px; height: 30px; display: block;
+  opacity: 0; transition: opacity 0.6s var(--ease);
+}
+.ladybug img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; user-select: none; }
+/* interior pages: docked ladybug grows smoothly on hover */
+.ladybug.lb-static { transition: opacity 0.6s var(--ease), transform 0.35s var(--ease); transform-origin: center; }
+@media (max-width: 720px) { .ladybug { width: 24px; height: 24px; } }
+
+@media (max-width: 900px) {
+  .home { --home-split: 100svh; }
+  .home-logo img { width: 50vw; }
+}

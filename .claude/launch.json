@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "runtimeExecutable": "ruby",
+      "runtimeArgs": ["/tmp/mave-site/serve.rb"],
+      "port": 4599,
+      "autoPort": true
+    }
+  ]
+}

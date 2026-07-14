@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Let’s Talk — Maria Garcia · Graphic Designer</title>
+  <meta name="description" content="Get in touch with Maria Garcia — graphic designer. Send a message, or reach out on email, phone or LinkedIn." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anaheim:wght@400..800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" type="image/png" href="img/logo-mariquita.png" />
+</head>
+<body class="page solid-nav talk-page">
+  <a class="ladybug" id="ladybug" href="index.html" aria-label="María García — Home"><img src="img/logo-mariquita.png" alt="" draggable="false" /></a>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="siteHeader">
+    <nav class="nav nav-right">
+      <a href="projects.html">Work</a>
+      <a href="about.html">About me</a>
+      <a href="letstalk.html" class="nav-cta" aria-current="page">Let’s talk</a>
+    </nav>
+  </header>
+
+  <!-- ===== CONTACT ===== -->
+  <main class="talk">
+    <img class="talk-bg" src="img/fondo-letstalk.png" alt="" aria-hidden="true" draggable="false" />
+    <div class="talk-grid">
+      <!-- left: intro + direct links -->
+      <div class="reveal">
+        <h1 class="talk-title">Let’s<br /><span class="accent">talk</span></h1>
+        <p class="talk-intro">Have a project in mind, a question, or just want to say hi? Fill in the form — or reach me directly.</p>
+        <ul class="talk-links">
+          <li><span class="k">Email</span><a href="mailto:maria.garvelasco@gmail.com">maria.garvelasco@gmail.com</a></li>
+          <li><span class="k">Phone</span><a href="tel:+34699215100">+34 699215100</a></li>
+          <li><span class="k">LinkedIn</span><a href="https://es.linkedin.com/in/maria-garcia-velasco-3968513b6" target="_blank" rel="noopener">/in/maria-garcia-velasco</a></li>
+        </ul>
+      </div>
+
+      <!-- right: form -->
+      <div class="reveal">
+        <!-- Submissions are delivered straight to María's inbox via FormSubmit (no email app opens).
+             The FIRST time someone sends, María gets a one-time "Activate" email — click it once, done. -->
+        <form class="form talk-form-card" id="contactForm" action="https://formsubmit.co/maria.garvelasco@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New message from your portfolio" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+          <div class="row2">
+            <div>
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@email.com" required />
+            </div>
+          </div>
+          <div>
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="What’s it about?" />
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me about your idea…" required></textarea>
+          </div>
+          <button type="submit" class="form-send">Send message →</button>
+        </form>
+      </div>
+    </div>
+    <div class="talk-foot">Maria Garcia · Graphic Designer</div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* The form POSTs to FormSubmit, which emails María directly — no mail app opens.
+       Optional: after the first (activation) send, swap the action email for the
+       hashed alias FormSubmit gives you, to keep the address out of the HTML. */
+    document.querySelectorAll(".reveal").forEach(function (n) { n.classList.add("in"); });
+  </script>
+</body>
+</html>
