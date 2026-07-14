@@ -252,7 +252,7 @@
         piece.style.setProperty("--r", (im.r || 0) + "deg");
         if (im.z) piece.style.zIndex = im.z;
         const img = el("img");
-        img.src = im.src; img.alt = p.title || ""; img.loading = "lazy";
+        img.src = im.src; img.alt = p.title || ""; img.loading = "lazy"; img.draggable = false;
         piece.appendChild(img);
         canvas.appendChild(piece);
       });
@@ -278,6 +278,48 @@
 
     collage.appendChild(canvas);
 
+    /* ---- press and hold any project photo to pick it up and move it around the
+       board — a light, tactile drag with a subtle tilt and lift, like nudging a
+       real print across a table. A plain tap (no real movement) still opens the
+       lightbox below, exactly as before. ---- */
+    let topZ = 10;
+    canvas.addEventListener("pointerdown", (e) => {
+      const piece = e.target.closest(".work-piece");
+      if (!piece || e.button === 2) return;
+      const startX = e.clientX, startY = e.clientY;
+      const cs = getComputedStyle(piece);
+      const baseDx = parseFloat(cs.getPropertyValue("--dx")) || 0;
+      const baseDy = parseFloat(cs.getPropertyValue("--dy")) || 0;
+      let moved = false;
+      piece.setPointerCapture(e.pointerId);
+      piece.classList.add("dragging");
+      piece.style.zIndex = ++topZ;
+
+      function onMove(ev) {
+        const nx = ev.clientX - startX, ny = ev.clientY - startY;
+        if (!moved && Math.hypot(nx, ny) > 5) moved = true;
+        piece.style.setProperty("--dx", baseDx + nx + "px");
+        piece.style.setProperty("--dy", baseDy + ny + "px");
+        const tilt = Math.max(-8, Math.min(8, (ev.movementX || 0) * 1.4));
+        piece.style.setProperty("--tilt", tilt + "deg");
+      }
+      function onUp() {
+        piece.releasePointerCapture(e.pointerId);
+        piece.classList.remove("dragging");
+        piece.style.setProperty("--tilt", "0deg");
+        piece.removeEventListener("pointermove", onMove);
+        piece.removeEventListener("pointerup", onUp);
+        piece.removeEventListener("pointercancel", onUp);
+        if (moved) {
+          piece.dataset.dragged = "1";
+          setTimeout(() => { piece.dataset.dragged = ""; }, 0);
+        }
+      }
+      piece.addEventListener("pointermove", onMove);
+      piece.addEventListener("pointerup", onUp);
+      piece.addEventListener("pointercancel", onUp);
+    });
+
     /* ---- click any project photo to see it bigger, click again (or Esc) to close ---- */
     const lightbox = el("div", "lightbox", '<img alt="" />');
     document.body.appendChild(lightbox);
@@ -286,6 +328,7 @@
       const piece = e.target.closest(".work-piece");
       const img = piece && piece.querySelector("img");
       if (!img) return;
+      if (piece.dataset.dragged === "1") return;
       lightboxImg.src = img.currentSrc || img.src;
       lightboxImg.alt = img.alt;
       lightbox.classList.add("open");

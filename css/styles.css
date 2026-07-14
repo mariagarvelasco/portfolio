@@ -252,14 +252,20 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 }
 
 .work-piece {
-  position: absolute; display: block; margin: 0; transform: rotate(var(--r, 0deg));
+  position: absolute; display: block; margin: 0;
+  transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(calc(var(--r, 0deg) + var(--tilt, 0deg)));
   transition: transform .5s var(--ease), filter .5s var(--ease); transform-origin: 50% 50%;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18)) drop-shadow(0 14px 22px rgba(0,0,0,0.14));
-  z-index: 1;
+  z-index: 1; touch-action: none; cursor: grab;
 }
-.work-piece img { width: 100%; height: auto; display: block; }
-.work-piece:hover { transform: rotate(0deg) scale(1.04); z-index: 5; }
+.work-piece img { width: 100%; height: auto; display: block; pointer-events: none; }
+.work-piece:hover { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(0deg) scale(1.04); z-index: 5; }
 .work-piece--flat { filter: none; }
+.work-piece.dragging {
+  transition: filter .3s var(--ease); cursor: grabbing; z-index: 80;
+  transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(calc(var(--r, 0deg) + var(--tilt, 0deg))) scale(1.06);
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,0.32)) drop-shadow(0 36px 54px rgba(0,0,0,0.26));
+}
 
 /* text block — number, title, description, positioned exactly like the reference */
 .work-text {
@@ -344,7 +350,11 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
   transition: background 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
 }
 .contact-btn:hover { background: var(--red); color: #fff; transform: translateY(-3px); }
-.contact-icons { display: flex; width: fit-content; gap: 14px; margin: 18px 0 0 auto; }
+/* centers the icon row under the button itself, not just flush to the footer's
+   right edge (the button is wider than the 3 icons, so edge-alignment alone
+   left them looking off-centre) */
+.contact-cta-group { display: inline-flex; flex-direction: column; align-items: center; }
+.contact-icons { display: flex; width: fit-content; gap: 14px; margin: 18px auto 0; }
 .contact-icon {
   display: inline-flex; align-items: center; justify-content: center;
   width: 38px; height: 38px; border-radius: 50%; flex: 0 0 auto;
@@ -512,7 +522,6 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
   .contact-inner { grid-template-columns: 1fr; grid-template-areas: "title" "sub" "cta"; }
   .contact-sub { padding-left: 0; }
   .contact-cta { text-align: left; }
-  .contact-icons { margin-left: 0; }
 
   .project { display: block; }
   .project-cap { margin-top: 16px; }
