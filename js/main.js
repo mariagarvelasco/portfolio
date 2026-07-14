@@ -327,16 +327,16 @@
   const qlStage = document.getElementById("qlookStage");
   if (qlStage) {
     const COLLAGE = [
-      { src: "img/fotos-home/foto-vinilo.png",      l: 10,   t: -1,   w: 33,   r: -6,          n: "(01)", nl: 45,   nt: 15   }, // 0 Die Mensch·Maschine
+      { src: "img/fotos-home/foto-vinilo.png",      l: 10,   t: -1,   w: 33,   r: -6,          n: "(01)", nl: 44,   nt: 18   }, // 0 Die Mensch·Maschine
       { src: "img/fotos-home/foto-vino-web.png",    l: 30.5, t: 43.5, w: 9,    r: 2,   z: 7,   n: "(02)", nl: 35,   nt: 80   }, // 1 El Trapiche — top layer
       { src: "img/fotos-home/foto-babou.jpg",       l: 35.25,t: 44.5, w: 17,   r: -8,  z: 6,   n: "(05)", nl: 43.8, nt: 72   }, // 2 Babou de Cully — above social media, below vino
-      { src: "img/fotos-home/foto-socialmedia.jpg", l: 51.5, t: 44.25,w: 20,   r: 2,           n: "(07)", nl: 74,   nt: 60   }, // 3 There's No End
-      { src: "img/fotos-home/foto-libro.png",       l: 5,    t: 18,   w: 12,   r: -6,  z: 5,   n: "(06)", nl: 2,    nt: 22   }, // 4 The Pritzker Prize — far left, on top of base layer
-      { src: "img/fotos-home/foto-tapiz.jpg",       l: 64,   t: 73,   w: 18,   r: 0,           n: "(09)", nl: 70,   nt: 96   }, // 5 Woven
-      { src: "img/fotos-home/foto-muestra-web.png", l: 27,   t: 27.25,w: 24,   r: -3,   z: 8,  n: "(04)", nl: 52.5, nt: 32.5 }, // 6 Clarendon — top layer
+      { src: "img/fotos-home/foto-socialmedia.jpg", l: 51.5, t: 44.25,w: 20,   r: 2,           n: "(07)", nl: 74,   nt: 63   }, // 3 There's No End
+      { src: "img/fotos-home/foto-libro.png",       l: 5,    t: 18,   w: 12,   r: -6,  z: 5,   n: "(06)", nl: 2,    nt: 25   }, // 4 The Pritzker Prize — far left, on top of base layer
+      { src: "img/fotos-home/foto-tapiz.jpg",       l: 64,   t: 73,   w: 18,   r: 0,           n: "(09)", nl: 70,   nt: 92   }, // 5 Woven
+      { src: "img/fotos-home/foto-muestra-web.png", l: 27,   t: 27.25,w: 24,   r: -3,   z: 8,  n: "(04)", nl: 52.9, nt: 32.5 }, // 6 Clarendon — top layer
       { src: "img/fotos-home/foto-cuadro-web.png",  l: 56,   t: 68,   w: 14.5, r: -3,          n: "",     nl: 50.8, nt: 74.2 }, // 7 Chromatic
-      { src: "img/fotos-home/foto.fotonovela.png",  l: 13.5, t: 34,   w: 23,   r: 0,           n: "(03)", nl: 25,   nt: 62   }, // 8 Fotonovela
-      { src: "img/fotos-home/foto-filmoteca.png",   l: 70.5, t: 34,   w: 21.5, r: -3,          n: "(08)", nl: 93,   nt: 46   }, // 9 Filmoteca de Catalunya
+      { src: "img/fotos-home/foto.fotonovela.png",  l: 13.5, t: 34,   w: 23,   r: 0,           n: "(03)", nl: 25,   nt: 63   }, // 8 Fotonovela
+      { src: "img/fotos-home/foto-filmoteca.png",   l: 70.5, t: 34,   w: 21.5, r: -3,          n: "(08)", nl: 92,   nt: 49   }, // 9 Filmoteca de Catalunya
     ];
     projects.forEach((p, i) => {
       const c = COLLAGE[i];
