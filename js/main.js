@@ -368,6 +368,7 @@
      Position/size/rotation are all in % of the stage, so the whole
      composition scales as one block regardless of viewport width. ---- */
   const qlStage = document.getElementById("qlookStage");
+  let qlSpread = [];   // filled below, read by the scroll-linked update() loop further down
   if (qlStage) {
     const COLLAGE = [
       { src: "img/fotos-home/foto-vinilo.png",      l: 10,   t: -1,   w: 33,   r: -6,          n: "(01)", nl: 44,   nt: 18   }, // 0 Die Mensch·Maschine
@@ -381,6 +382,12 @@
       { src: "img/fotos-home/foto.fotonovela.png",  l: 13.5, t: 34,   w: 23,   r: 0,           n: "(03)", nl: 25,   nt: 63   }, // 8 Fotonovela
       { src: "img/fotos-home/foto-filmoteca.png",   l: 70.5, t: 34,   w: 21.5, r: -3,          n: "(08)", nl: 92,   nt: 49   }, // 9 Filmoteca de Catalunya
     ];
+    // centroid of the whole composition — each piece's initial "spread" direction
+    // points straight outward from here, so the expanded layout still reads as
+    // one balanced arrangement instead of a random scatter
+    const qlCenterL = COLLAGE.reduce((s, c) => s + (c.l + c.w / 2), 0) / COLLAGE.length;
+    const qlCenterT = COLLAGE.reduce((s, c) => s + c.t, 0) / COLLAGE.length;
+
     projects.forEach((p, i) => {
       const c = COLLAGE[i];
       if (!c) return;
@@ -393,6 +400,10 @@
       if (c.z) a.style.zIndex = c.z;
       a.innerHTML = `<img src="${esc(c.src)}" alt="${esc(p.title || "")}" loading="lazy" />`;
       qlStage.appendChild(a);
+
+      const dx0 = (c.l + c.w / 2) - qlCenterL, dy0 = c.t - qlCenterT;
+      const mag = Math.hypot(dx0, dy0) || 1;
+      qlSpread.push({ el: a, ux: dx0 / mag, uy: dy0 / mag });
 
       // index number — sits in the clear margin just outside its own photo
       // (never over any photo), matches that project's number on the Work
@@ -529,6 +540,22 @@
       const offset = (r.top + r.height / 2) - vh / 2;
       const speed = parseFloat(node.dataset.speed) || 0;
       node.style.setProperty("--py", `${(-offset * speed).toFixed(1)}px`);
+    }
+
+    /* ---- home project photos: spread apart near the top of the page, drawing
+       together into today's exact composition as the section settles into the
+       centre of the screen — tied 1:1 to scroll, no easing lag. ---- */
+    if (qlStage && qlSpread.length && !prefersReduced) {
+      const stageRect = qlStage.getBoundingClientRect();
+      const stageCenterY = stageRect.top + stageRect.height / 2;
+      const dist = Math.abs(stageCenterY - vh / 2);
+      const maxDist = vh * 0.75;
+      const progress = Math.max(0, Math.min(1, 1 - dist / maxDist));
+      const spread = stageRect.width * 0.055 * (1 - progress);
+      for (const it of qlSpread) {
+        it.el.style.setProperty("--sx", (it.ux * spread).toFixed(1) + "px");
+        it.el.style.setProperty("--sy", (it.uy * spread).toFixed(1) + "px");
+      }
     }
   }
   window.addEventListener("scroll", onScroll, { passive: true });

@@ -625,14 +625,23 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 /* each project piece — a plain cutout/photo, softly shadowed, no frame */
 /* two layered shadows — a tight contact shadow + a softer ambient one — read as an object
    actually resting on the table, rather than a flat blur floating behind it */
+/* outer anchor: ONLY the scroll-linked spread↔converge translate — deliberately
+   untransitioned (transition:none) so it tracks scroll 1:1 with no lag/rubber-band */
 .ql-item {
-  position: absolute; display: block; transform: rotate(var(--r, 0deg));
+  position: absolute; display: block;
+  transform: translate(var(--sx, 0px), var(--sy, 0px));
+}
+/* inner image: the resting tilt + hover flatten/scale, exactly as before,
+   split out so the hover polish keeps its own smooth easing independent of scroll */
+.ql-item img {
+  width: 100%; height: auto; display: block; pointer-events: none;
+  transform: rotate(var(--r, 0deg));
   transition: transform .5s var(--ease), filter .5s var(--ease); transform-origin: 50% 50%;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.20)) drop-shadow(0 16px 26px rgba(0,0,0,0.16));
 }
-.ql-item img { width: 100%; height: auto; display: block; pointer-events: none; }
-.ql-item:hover {
-  transform: rotate(0deg) scale(var(--hs, 1.35)); z-index: 9;
+.ql-item:hover { z-index: 9; }
+.ql-item:hover img {
+  transform: rotate(0deg) scale(var(--hs, 1.35));
   filter: drop-shadow(0 3px 6px rgba(0,0,0,0.24)) drop-shadow(0 24px 38px rgba(0,0,0,0.22));
 }
 /* static index numbers, matching the reference board's annotations — never move or scale */
