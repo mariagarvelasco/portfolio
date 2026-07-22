@@ -544,13 +544,15 @@
 
     /* ---- home project photos: spread apart near the top of the page, drawing
        together into today's exact composition as the section settles into the
-       centre of the screen — tied 1:1 to scroll, no easing lag. ---- */
+       centre of the screen — tied 1:1 to scroll, no easing lag. One-way: once
+       the section has reached/passed centre, it stays joined — scrolling
+       further down (or back up to just before centre) doesn't re-spread it. ---- */
     if (qlStage && qlSpread.length && !prefersReduced) {
       const stageRect = qlStage.getBoundingClientRect();
       const stageCenterY = stageRect.top + stageRect.height / 2;
-      const dist = Math.abs(stageCenterY - vh / 2);
+      const signedDist = stageCenterY - vh / 2; // positive = still approaching from below
       const maxDist = vh * 0.75;
-      const progress = Math.max(0, Math.min(1, 1 - dist / maxDist));
+      const progress = Math.max(0, Math.min(1, 1 - signedDist / maxDist));
       const spread = stageRect.width * 0.055 * (1 - progress);
       for (const it of qlSpread) {
         it.el.style.setProperty("--sx", (it.ux * spread).toFixed(1) + "px");
