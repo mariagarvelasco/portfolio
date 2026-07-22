@@ -239,8 +239,8 @@
       (p.anchors || []).forEach((a) => {
         const anchor = el("span", "work-anchor");
         anchor.id = a;
-        anchor.style.left = p.textL + "%";
-        anchor.style.top = p.textT + "%";
+        anchor.style.left = p.titleL + "%";
+        anchor.style.top = p.titleT + "%";
         canvas.appendChild(anchor);
       });
 
@@ -257,23 +257,35 @@
         canvas.appendChild(piece);
       });
 
-      const text = el("div", "work-text",
-        `<div class="work-text-head">` +
-          `<span class="n">${esc(p.n || "")}</span>` +
-          `<h3 class="t">${esc(p.title || "")}</h3>` +
-          `<button class="work-text-toggle" type="button" aria-label="Read description" aria-expanded="false">⌄</button>` +
-        `</div>` +
-        `<p class="d">${esc(p.desc || "")}</p>`);
-      text.style.left = p.textL + "%";
-      text.style.top = p.textT + "%";
-      text.style.width = p.textW + "%";
-      const toggle = text.querySelector(".work-text-toggle");
-      toggle.addEventListener("click", (e) => {
+      // number, title and description now sit as three independently placed
+      // pieces (per project — some to the side, some above/below, matching
+      // each project's own reference composition), instead of one stacked block
+      const numEl = el("span", "work-num", esc(p.n || ""));
+      numEl.dataset.n = p.n || "";
+      numEl.style.left = p.numL + "%";
+      numEl.style.top = p.numT + "%";
+      canvas.appendChild(numEl);
+
+      const titleEl = el("h3", "work-title" + (p.titleV ? " work-title--v" : ""), esc(p.title || ""));
+      titleEl.dataset.n = p.n || "";
+      titleEl.style.left = p.titleL + "%";
+      titleEl.style.top = p.titleT + "%";
+      canvas.appendChild(titleEl);
+
+      const descEl = el("div", "work-desc",
+        `<button class="work-desc-toggle" type="button" aria-label="Read description" aria-expanded="false">Read more <span aria-hidden="true">⌄</span></button>` +
+        `<p>${esc(p.desc || "")}</p>`);
+      descEl.dataset.n = p.n || "";
+      descEl.style.left = p.descL + "%";
+      descEl.style.top = p.descT + "%";
+      descEl.style.width = p.descW + "%";
+      const descToggle = descEl.querySelector(".work-desc-toggle");
+      descToggle.addEventListener("click", (e) => {
         e.stopPropagation();
-        const open = text.classList.toggle("open");
-        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        const open = descEl.classList.toggle("open");
+        descToggle.setAttribute("aria-expanded", open ? "true" : "false");
       });
-      canvas.appendChild(text);
+      canvas.appendChild(descEl);
     });
 
     collage.appendChild(canvas);

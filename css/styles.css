@@ -267,18 +267,24 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
   filter: drop-shadow(0 10px 16px rgba(0,0,0,0.32)) drop-shadow(0 36px 54px rgba(0,0,0,0.26));
 }
 
-/* text block — number, title, description, positioned exactly like the reference */
-.work-text {
-  position: absolute; display: flex; flex-direction: column; gap: 4px;
-  min-width: 140px; z-index: 2;
+/* number, title and description — three independently placed pieces per
+   project (matching each project's own reference composition: some titles
+   sit vertically beside the photo, some sit horizontally above it, the
+   number can land to the side or underneath) instead of one stacked block */
+.work-num {
+  position: absolute; z-index: 2; color: #E3ACBD; font-style: italic; font-weight: 500;
+  font-size: clamp(11px, 0.85vw, 13px); letter-spacing: 0.02em;
 }
-/* wrapper is invisible to layout on desktop (n/t/toggle stay the exact same
-   stacked flex children they always were) — only becomes a real row on phones */
-.work-text-head { display: contents; }
-.work-text .n { color: #E3ACBD; font-style: italic; font-weight: 500; font-size: clamp(11px, 0.85vw, 13px); letter-spacing: 0.02em; }
-.work-text .t { font-weight: 500; font-size: clamp(12px, 0.9vw, 13px); line-height: 1.1; }
-.work-text .d { color: var(--ink-soft); font-size: clamp(8.5px, 0.62vw, 9px); line-height: 1.3; }
-.work-text-toggle { display: none; }
+.work-title {
+  position: absolute; z-index: 2; margin: 0; font-weight: 500;
+  font-size: clamp(12px, 0.9vw, 13px); line-height: 1.15; max-width: 16%;
+}
+.work-title--v {
+  writing-mode: vertical-rl; text-orientation: mixed; max-width: none; max-height: 18%;
+}
+.work-desc { position: absolute; z-index: 2; }
+.work-desc p { margin: 0; color: var(--ink-soft); font-size: clamp(8.5px, 0.62vw, 9px); line-height: 1.3; }
+.work-desc-toggle { display: none; }
 
 /* click a project photo to see it bigger; click anywhere (or Esc) to close */
 .lightbox {
@@ -669,27 +675,51 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
    showing the full paragraph at this width is what caused text to sit on top
    of the photos. */
 @media (max-width: 760px) {
-  /* the 140px desktop min-width overflows the viewport for items positioned
-     near the right edge at this scale — let the existing %-width govern instead */
-  .work-text { min-width: 0; max-width: calc(100vw - var(--gut)); }
-  .work-text-head { display: flex; align-items: baseline; gap: 5px; }
-  .work-text-toggle {
-    display: inline-flex; align-items: center; justify-content: center;
-    margin-left: auto; padding: 2px 4px; background: none; border: none;
-    color: var(--ink-soft); font-size: 11px; line-height: 1;
-    transition: transform 0.3s var(--ease);
+  /* percentage widths tuned for desktop overflow the viewport at this scale
+     for pieces positioned near the edges — let them breathe instead */
+  /* vertical titles are set in writing-mode: vertical-rl on desktop, where
+     their height is a % of a tall canvas — at mobile widths the canvas
+     shrinks but the font-size floor doesn't, so a long vertical title would
+     sprawl for hundreds of px straight through neighbouring projects.
+     Force every title back to normal horizontal flow here instead. */
+  .work-title, .work-title--v {
+    writing-mode: horizontal-tb; text-orientation: unset;
+    max-width: calc(100vw - var(--gut) * 2); max-height: none;
   }
-  .work-text.open .work-text-toggle { transform: rotate(180deg); }
-  .work-text .d {
+  .work-desc { width: auto !important; max-width: calc(100vw - var(--gut) * 2); }
+  .work-desc-toggle {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 4px; margin: 0 0 2px -4px; background: none; border: none;
+    color: var(--ink-soft); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .work-desc-toggle span { display: inline-block; transition: transform 0.3s var(--ease); }
+  .work-desc.open .work-desc-toggle span { transform: rotate(180deg); }
+  .work-desc p {
     max-height: 0; overflow: hidden; margin: 0;
     transition: max-height 0.35s var(--ease);
   }
-  .work-text.open {
+  .work-desc.open {
     z-index: 6; background: rgba(255,255,255,0.96); border-radius: 6px;
-    padding: 5px 7px; margin: -5px -7px;
+    padding: 3px 7px; margin: -3px -7px;
     box-shadow: 0 8px 22px rgba(0,0,0,0.16);
   }
-  .work-text.open .d { max-height: 260px; margin-top: 2px; }
+  .work-desc.open p { max-height: 260px; margin-top: 2px; }
+
+  /* the board is a wide 2D collage — on a narrow phone column, projects
+     that sit side-by-side on desktop stack close enough that a label can
+     land over a neighbouring photo. Rather than chase each case, give every
+     label a small legible "chip" so it reads cleanly wherever it falls. */
+  .work-num, .work-title, .work-desc-toggle {
+    background: rgba(255,255,255,0.92); border-radius: 4px;
+    padding: 1px 5px; margin-left: -5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .work-desc-toggle { margin-left: -4px; }
+  /* short labels (a number, a one-word title) are fully swallowed if a
+     longer neighbouring chip happens to paint on top of them in this tight
+     column — keep the short ones on top so nothing disappears entirely */
+  .work-num { z-index: 4; }
+  .work-title[data-n="(05)"] { z-index: 3; }
 }
 
 /* header: nav always right-aligned, no brand mark */
