@@ -724,6 +724,9 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
   /* the horizontal titles sit right at the canvas top here, so the desktop
      pull-up would shove them into the page header — no pull on mobile */
   .collage { margin-top: 0; }
+  /* drag is desktop-only — touch-action:none would swallow normal page
+     scrolling whenever a finger lands on a photo */
+  .work-piece { touch-action: auto; cursor: default; }
   /* percentage widths tuned for desktop overflow the viewport at this scale
      for pieces positioned near the edges — let them breathe instead */
   /* vertical titles are set in writing-mode: vertical-rl on desktop, where

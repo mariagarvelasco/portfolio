@@ -335,6 +335,8 @@
        lightbox below, exactly as before. ---- */
     let topZ = 10;
     canvas.addEventListener("pointerdown", (e) => {
+      // drag is desktop-only: on a phone it fights with touch scrolling
+      if (window.matchMedia("(max-width: 760px)").matches) return;
       const piece = e.target.closest(".work-piece");
       if (!piece || e.button === 2) return;
       const startX = e.clientX, startY = e.clientY;
