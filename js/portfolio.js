@@ -138,9 +138,9 @@ const WORK = {
     {
       n: "(03)", title: "La Santa Biblia", anchors: ["proj-8"],
       desc: "La Santa Biblia is an editorial photo novel that follows a young girl as she uncovers the hidden secrets of her deeply ultra-Catholic family. The project combines photography, editorial design, and layout to create a visual narrative that reinforces the story's atmosphere of mystery and tension.",
-      titleL: 3.61, titleT: 13.01, titleV: false,
+      titleL: 3.61, titleT: 14.45, titleV: false,
       numL: 29, numT: 17.8,
-      descL: 2.64, descT: 30.88, descW: 18,
+      descL: 6.0, descT: 30.88, descW: 18,
       images: [
         { src: "img/proyecto-fotonovela/foto-libro2.png", l: 3.61,  t: 15.16, w: 23.12, r: 0 },
         { src: "img/proyecto-fotonovela/foto-libro1.png", l: 11.88, t: 20.26, w: 30.56, r: 0 },
@@ -152,7 +152,7 @@ const WORK = {
       desc: "A typographic specimen that reinterprets the Clarendon typeface from a contemporary perspective. Through dynamic compositions, visual hierarchies, and the use of color, the project explores the expressive potential of the typeface while demonstrating its application in modern design.",
       titleL: 51.7, titleT: 25.89, titleV: true,
       numL: 86, numT: 28.56,
-      descL: 53.96, descT: 31.55, descW: 18, descR: -5.3,
+      descL: 57, descT: 31.55, descW: 18, descR: -5.3,
       images: [
         { src: "img/proyecto-muestra/Screen Recording 2026-07-07 at 15.11.28.gif", l: 53.96, t: 25.89, w: 29.79, r: -5.3 },
       ],
@@ -161,7 +161,7 @@ const WORK = {
       n: "(05)", title: "Babou", anchors: ["proj-2"],
       desc: "Babou is a fold-out brochure designed for Gala, a Barcelona restaurant inspired by Salvador Dalí's surrealism. The project combines a menu and a magazine into a single editorial piece, using dynamic compositions and a clear visual hierarchy to reinterpret the surrealist universe.",
       titleL: 39.6, titleT: 33.59, titleV: true,
-      numL: 74.9, numT: 35.9,
+      numL: 74.9, numT: 35.3,
       descL: 41.94, descT: 40.59, descW: 18,
       images: [
         { src: "img/proyecto-babou/artista-editorial.jpg", l: 41.94, t: 33.59, w: 30.69, r: 0 },
@@ -172,8 +172,8 @@ const WORK = {
     {
       n: "(06)", title: "Editorial Reinterpretation of The Pritzker Architecture Prize", anchors: ["proj-4"],
       desc: "An editorial redesign inspired by Frank Gehry's innovative architectural approach. The book transforms reading into an interactive experience through folds, varied page formats, and an unconventional structure that encourages readers to discover the content, translating the architect's experimental and groundbreaking vision into editorial design.",
-      titleL: 0.8, titleT: 33.37, titleV: true,
-      numL: 31, numT: 46.18,
+      titleL: 31.3, titleT: 42.26, titleV: true,
+      numL: 28.2, numT: 48.95,
       descL: 0.8, descT: 49.48, descW: 18,
       images: [
         { src: "img/proyecto-libro/2gif-fotos-llibre.gif", l: 0.8, t: 42.26, w: 29.38, r: 0, noShadow: true },
@@ -183,7 +183,7 @@ const WORK = {
       n: "(07)", title: "Lift Your Eyes", anchors: ["proj-3"],
       desc: "An awareness campaign addressing thumb scrolling addiction and excessive social media consumption. The project develops a visual identity across posters, videos, and digital advertisements, encouraging viewers to reflect on the time they spend on their screens. Through the message “Lift your eyes. The world's still right here.”, the campaign invites people to reconnect with the world around them.",
       titleL: 22.5, titleT: 51.26, titleV: true,
-      numL: 96.2, numT: 54.99,
+      numL: 96.9, numT: 59.2,
       descL: 17.92, descT: 62.16, descW: 18,
       images: [
         { src: "img/proyecto-socialmedia/mockup mobil.jpg",       l: 24.79, t: 51.26, w: 28.19, r: 0 },
@@ -195,9 +195,9 @@ const WORK = {
     {
       n: "(08)", title: "Filmoteca de Catalunya Visual Identity Redesign", anchors: ["proj-9"],
       desc: "A visual identity redesign for the Filmoteca de Catalunya inspired by the cyanotype process. The project translates the handcrafted, organic, and timeless qualities of this historic photographic technique into a complete visual system, applied across the logo, posters, social media, and digital platforms. Combining the distinctive blue tones of cyanotype with a contemporary aesthetic, the identity celebrates the preservation and heritage of cinema.",
-      titleL: 4.57, titleT: 67.07, titleV: true,
+      titleL: 14.54, titleT: 67.07, titleV: true,
       numL: 86.9, numT: 75.54,
-      descL: 44, descT: 79.47, descW: 18,
+      descL: 57.5, descT: 79.47, descW: 18,
       images: [
         { src: "img/proyecto-filmoteca/filmo1-web.jpg",      l: 57.5, t: 73.12, w: 27.08, r: 0 },
         { src: "img/proyecto-filmoteca/foto-libro4-web.jpg", l: 8.06,  t: 76.51, w: 33.19, r: -7.3 },
@@ -209,7 +209,7 @@ const WORK = {
       desc: "Alongside graphic design, I enjoy exploring other forms of artistic expression through personal projects. Painting and experimenting with handcrafted techniques, such as tapestry, allow me to develop new ideas, work with different materials, and nurture my creativity through a more hands-on approach.",
       titleL: 41.2, titleT: 86.01, titleV: true,
       numL: 83.7, numT: 88.26,
-      descL: 67, descT: 96.9, descW: 18,
+      descL: 75.5, descT: 96.9, descW: 18,
       images: [
         { src: "img/proyecto-cuadro1/cuadro-web.jpg", l: 43.47, t: 86.01, w: 37.92, r: 0 },
         { src: "img/proyecto-tapiz/fototapiz1.jpg",   l: 63.19, t: 92.09, w: 22.15, r: 0 },
