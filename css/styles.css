@@ -800,3 +800,26 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
   .home { --home-split: 100svh; }
   .home-logo img { width: 50vw; }
 }
+
+/* =========================================================
+   404 — the lost ladybug
+   ========================================================= */
+.nf {
+  min-height: 100svh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  background: var(--pink); padding: 110px var(--gut) 90px; overflow: hidden;
+}
+.nf-tag { color: #E3ACBD; font-style: italic; font-size: clamp(14px, 1.2vw, 17px); letter-spacing: 0.04em; }
+.nf-code {
+  display: flex; align-items: center; gap: clamp(10px, 2.4vw, 26px);
+  font-size: clamp(110px, 22vw, 250px); font-weight: 400; line-height: 1; color: var(--ink);
+  margin-top: clamp(6px, 1.5vh, 14px);
+}
+/* the ladybug plays the zero — same slow bob as the scroll cues */
+.nf-code img {
+  width: clamp(80px, 15.5vw, 175px); height: auto;
+  animation: bob 2.6s var(--ease) infinite;
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,0.12));
+}
+.nf-title { margin-top: clamp(18px, 4vh, 38px); font-size: clamp(22px, 3vw, 40px); font-weight: 400; }
+.nf-sub { margin: 12px 0 30px; color: var(--ink-soft); font-size: 14px; line-height: 1.6; max-width: 46ch; }
