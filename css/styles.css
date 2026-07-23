@@ -419,7 +419,14 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 .ab-gray { background: var(--gray); }
 .ab-pink { background: var(--pink); }   /* about hero background */
 
-.ab-hero { padding-top: clamp(120px,16vh,190px); padding-bottom: clamp(60px,9vh,110px); min-height: 100svh; display: grid; align-items: start; justify-items: center; }
+.ab-hero { position: relative; padding-top: clamp(120px,16vh,190px); padding-bottom: clamp(60px,9vh,110px); min-height: 100svh; display: grid; align-items: start; justify-items: center; }
+/* discreet scroll cue, bottom-right of the first screen — same slow bob as the home hero's */
+.ab-scroll {
+  position: absolute; right: var(--gut); bottom: 30px;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink); opacity: 0.6;
+  animation: bob 2.4s var(--ease) infinite;
+}
 .ab-hero-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1fr 0.9fr; gap: clamp(30px,5vw,70px); align-items: center; }
 .ab-name { font-weight: 300; font-size: clamp(30px,4vw,52px); color: #c9c4c4; line-height: 1; margin-left: clamp(70px, 14vw, 220px); margin-top: clamp(24px, 5vh, 60px); }
 .ab-role { font-weight: 400; font-size: clamp(26px,4vw,50px); line-height: 1.15; margin: 6px 0 0; max-width: 24ch; }
