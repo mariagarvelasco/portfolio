@@ -226,7 +226,7 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 .work-head { max-width: var(--maxw); margin: 0 auto clamp(14px,2.2vh,28px); position: relative; z-index: 3; }
 .work-head-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
 .work-head h2 { font-size: clamp(30px,4.2vw,64px); font-weight: 400; }
-.work-head-note { color: var(--ink-soft); font-size: 13px; text-align: right; font-style: italic; white-space: nowrap; }
+.work-head p.work-head-note { color: #E3ACBD; font-size: 13px; text-align: right; font-style: italic; white-space: nowrap; }
 .work-head h2 .accent { color: #E3ACBD; }   /* "work" in pink, not red */
 .work-head p { font-size: 13px; margin-top: 14px; color: var(--ink-soft); max-width: 42ch; }
 

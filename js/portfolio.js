@@ -129,7 +129,7 @@ const WORK = {
       desc: "El Trapezista is a wine label design that blends tradition with a contemporary aesthetic. The project reinterprets classic wine label elements through handcrafted textures, an asymmetric composition, and a pink color palette, featuring Montserrat Mountain as a symbolic reference to the winery.",
       titleL: 55.6, titleT: 14.6, titleV: true,
       numL: 80, numT: 17.8,
-      descL: 57.92, descT: 22.35, descW: 15,
+      descL: 57.92, descT: 23.0, descW: 15,
       images: [
         { src: "img/proyecto-vino/wine-hand.jpg",      l: 73.96, t: 18.58, w: 14.03, r: 6.9 },
         { src: "img/proyecto-vino/wine-hand2-web.jpg", l: 57.92, t: 14.6,  w: 19.79, r: 0 },
@@ -172,7 +172,7 @@ const WORK = {
     {
       n: "(06)", title: "Editorial Reinterpretation of\nThe Pritzker Architecture Prize", anchors: ["proj-4"],
       desc: "An editorial redesign inspired by Frank Gehry's innovative architectural approach. The book transforms reading into an interactive experience through folds, varied page formats, and an unconventional structure that encourages readers to discover the content, translating the architect's experimental and groundbreaking vision into editorial design.",
-      titleL: -2.65, titleT: 40.8, titleV: true,
+      titleL: -2.65, titleT: 41.5, titleV: true,
       numL: 28.2, numT: 48.95,
       descL: 0.8, descT: 49.48, descW: 18,
       images: [
