@@ -223,7 +223,7 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
    4. WORK — collage, tight per-project grouping
    ========================================================= */
 .work { position: relative; background: var(--white); padding: clamp(4px,1vh,22px) var(--gut) 0; overflow: hidden; }
-.work-head { max-width: var(--maxw); margin: 0 auto clamp(36px,6vh,70px); position: relative; z-index: 3; }
+.work-head { max-width: var(--maxw); margin: 0 auto clamp(14px,2.2vh,28px); position: relative; z-index: 3; }
 .work-head h2 { font-size: clamp(30px,4.2vw,64px); font-weight: 400; }
 .work-head h2 .accent { color: #E3ACBD; }   /* "work" in pink, not red */
 .work-head p { font-size: 13px; margin-top: 14px; color: var(--ink-soft); max-width: 42ch; }
@@ -281,9 +281,26 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 }
 .work-title--v {
   writing-mode: vertical-rl; text-orientation: mixed; max-width: none; max-height: 18%;
+  /* vertical-rl on its own reads top-to-bottom with glyphs leaning for a
+     head-tilt-right read — the reference reads bottom-to-top instead (glyphs
+     leaning the other way, lines stacking toward the photo). A center
+     180deg flip gives both without touching left/top position. */
+  transform: rotate(180deg);
 }
-.work-desc { position: absolute; z-index: 2; }
+.work-desc { position: absolute; z-index: 2; transform: rotate(var(--descR, 0deg)); transform-origin: top left; }
 .work-desc p { margin: 0; color: var(--ink-soft); font-size: clamp(8.5px, 0.62vw, 9px); line-height: 1.3; }
+
+.work-circle {
+  position: absolute; z-index: 1; display: block; width: 1.944%; aspect-ratio: 1;
+  border-radius: 50%; overflow: hidden; pointer-events: none;
+}
+.work-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.work-logo-bg {
+  position: absolute; z-index: 0; display: block; pointer-events: none;
+  opacity: 0.9;
+}
+.work-logo-bg img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .work-desc-toggle { display: none; }
 
 /* click a project photo to see it bigger; click anywhere (or Esc) to close */
@@ -667,7 +684,7 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 }
 
 /* Projects page: clear the fixed header above the collage */
-.projects-page .work { padding-top: clamp(55px, 6vh, 85px); }
+.projects-page .work { padding-top: clamp(68px, 7.5vh, 100px); }
 
 /* Work page on phones only — same collage/composition as desktop (nothing about
    position, size or text changes above this breakpoint). The only difference:
@@ -683,10 +700,10 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
      sprawl for hundreds of px straight through neighbouring projects.
      Force every title back to normal horizontal flow here instead. */
   .work-title, .work-title--v {
-    writing-mode: horizontal-tb; text-orientation: unset;
+    writing-mode: horizontal-tb; text-orientation: unset; transform: none;
     max-width: calc(100vw - var(--gut) * 2); max-height: none;
   }
-  .work-desc { width: auto !important; max-width: calc(100vw - var(--gut) * 2); }
+  .work-desc { width: auto !important; max-width: calc(100vw - var(--gut) * 2); transform: none; }
   .work-desc-toggle {
     display: inline-flex; align-items: center; gap: 4px;
     padding: 2px 4px; margin: 0 0 2px -4px; background: none; border: none;

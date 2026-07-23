@@ -235,6 +235,20 @@
     gray.style.top = work.grayFrom + "%";
     canvas.appendChild(gray);
 
+    /* the María García wordmark, sitting behind everything else on the board */
+    (work.logos || []).forEach((lg) => {
+      const mark = el("span", "work-logo-bg");
+      mark.style.left = lg.l + "%";
+      mark.style.top = lg.t + "%";
+      mark.style.width = lg.w + "%";
+      mark.style.height = lg.h + "%";
+      if (lg.rot) mark.style.transform = `rotate(${lg.rot}deg)`;
+      const img = el("img");
+      img.src = lg.src; img.alt = ""; img.loading = "lazy"; img.draggable = false;
+      mark.appendChild(img);
+      canvas.appendChild(mark);
+    });
+
     (work.items || []).forEach((p) => {
       (p.anchors || []).forEach((a) => {
         const anchor = el("span", "work-anchor");
@@ -279,6 +293,7 @@
       descEl.style.left = p.descL + "%";
       descEl.style.top = p.descT + "%";
       descEl.style.width = p.descW + "%";
+      if (p.descR) descEl.style.setProperty("--descR", p.descR + "deg");
       const descToggle = descEl.querySelector(".work-desc-toggle");
       descToggle.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -286,6 +301,17 @@
         descToggle.setAttribute("aria-expanded", open ? "true" : "false");
       });
       canvas.appendChild(descEl);
+    });
+
+    /* small round photo-crops scattered between projects, purely decorative */
+    (work.circles || []).forEach((c) => {
+      const dot = el("span", "work-circle");
+      dot.style.left = c.l + "%";
+      dot.style.top = c.t + "%";
+      const img = el("img");
+      img.src = c.src; img.alt = ""; img.loading = "lazy"; img.draggable = false;
+      dot.appendChild(img);
+      canvas.appendChild(dot);
     });
 
     collage.appendChild(canvas);
@@ -303,21 +329,36 @@
       const baseDx = parseFloat(cs.getPropertyValue("--dx")) || 0;
       const baseDy = parseFloat(cs.getPropertyValue("--dy")) || 0;
       let moved = false;
+      let targetX = startX, targetY = startY; // latest raw pointer position
+      let curTilt = 0, rafId = null;
       piece.setPointerCapture(e.pointerId);
       piece.classList.add("dragging");
       piece.style.zIndex = ++topZ;
 
-      function onMove(ev) {
-        const nx = ev.clientX - startX, ny = ev.clientY - startY;
-        if (!moved && Math.hypot(nx, ny) > 5) moved = true;
+      function frame() {
+        const nx = targetX - startX, ny = targetY - startY;
         piece.style.setProperty("--dx", baseDx + nx + "px");
         piece.style.setProperty("--dy", baseDy + ny + "px");
-        const tilt = Math.max(-8, Math.min(8, (ev.movementX || 0) * 1.4));
-        piece.style.setProperty("--tilt", tilt + "deg");
+        // ease the tilt toward how far off-axis the recent motion is, instead
+        // of snapping straight to it — a raw per-event delta is noisy and
+        // reads as a shiver; easing it makes the swing feel weighty and organic
+        const targetTilt = Math.max(-8, Math.min(8, (targetX - lastTiltX) * 1.4));
+        lastTiltX = targetX;
+        curTilt += (targetTilt - curTilt) * 0.18;
+        piece.style.setProperty("--tilt", curTilt.toFixed(2) + "deg");
+        rafId = requestAnimationFrame(frame);
+      }
+      let lastTiltX = startX;
+      rafId = requestAnimationFrame(frame);
+
+      function onMove(ev) {
+        targetX = ev.clientX; targetY = ev.clientY;
+        if (!moved && Math.hypot(targetX - startX, targetY - startY) > 5) moved = true;
       }
       function onUp() {
         piece.releasePointerCapture(e.pointerId);
         piece.classList.remove("dragging");
+        cancelAnimationFrame(rafId);
         piece.style.setProperty("--tilt", "0deg");
         piece.removeEventListener("pointermove", onMove);
         piece.removeEventListener("pointerup", onUp);
