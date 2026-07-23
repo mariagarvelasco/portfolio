@@ -221,6 +221,19 @@
     }
   }
 
+  /* ---- About page: the "Scroll to explore" cue fades away for good the
+     moment the visitor starts scrolling — its job is done by then. ---- */
+  const abScroll = document.querySelector(".ab-scroll");
+  if (abScroll) {
+    const hideAbScroll = () => {
+      if (window.scrollY > 60) {
+        abScroll.classList.add("gone");
+        window.removeEventListener("scroll", hideAbScroll);
+      }
+    };
+    window.addEventListener("scroll", hideAbScroll, { passive: true });
+  }
+
   /* ---- work canvas — ONE continuous board, exactly like the reference:
      every photo and every text block keeps the precise position/size it
      has there (l/t/w/r are all % of the FULL page), so projects sit just
