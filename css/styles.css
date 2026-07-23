@@ -710,7 +710,7 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 }
 
 /* Projects page: clear the fixed header above the collage */
-.projects-page .work { padding-top: clamp(68px, 7.5vh, 100px); }
+.projects-page .work { padding-top: clamp(96px, 11vh, 140px); }
 
 /* Work page on phones only — same collage/composition as desktop (nothing about
    position, size or text changes above this breakpoint). The only difference:
