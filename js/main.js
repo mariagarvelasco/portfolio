@@ -548,17 +548,10 @@
     ents.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
   }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
   document.querySelectorAll(".reveal").forEach((n) => io.observe(n));
-  // project photos fade in softly on first scroll too (home collage + work
-  // board + the little round crops) — small per-item delays so neighbouring
-  // pieces cascade in rather than popping up all at once
-  document.querySelectorAll(".ql-item").forEach((n, i) => {
-    n.style.setProperty("--rvd", (i * 70) + "ms");
-    io.observe(n);
-  });
-  document.querySelectorAll(".work-piece, .work-circle").forEach((n, i) => {
-    n.style.setProperty("--rvd", ((i % 3) * 110) + "ms");
-    io.observe(n);
-  });
+  // work-board photos reveal on first scroll with the same soft rise the
+  // About-page blocks use (the CSS applies it to the inner image so the
+  // piece's own hover/drag transform is untouched)
+  document.querySelectorAll(".work-piece, .work-circle").forEach((n) => io.observe(n));
 
   /* ---- header state — on the home page this matches the exact moment the
      ladybug docks top-left (same "pink block reaches the top" check it uses),
