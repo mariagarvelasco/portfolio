@@ -129,7 +129,7 @@ const WORK = {
       desc: "El Trapezista is a wine label design that blends tradition with a contemporary aesthetic. The project reinterprets classic wine label elements through handcrafted textures, an asymmetric composition, and a pink color palette, featuring Montserrat Mountain as a symbolic reference to the winery.",
       titleL: 55.6, titleT: 14.6, titleV: true,
       numL: 80, numT: 17.8,
-      descL: 57.92, descT: 24.26, descW: 26,
+      descL: 57.92, descT: 22.35, descW: 15,
       images: [
         { src: "img/proyecto-vino/wine-hand.jpg",      l: 73.96, t: 18.58, w: 14.03, r: 6.9 },
         { src: "img/proyecto-vino/wine-hand2-web.jpg", l: 57.92, t: 14.6,  w: 19.79, r: 0 },
@@ -140,7 +140,7 @@ const WORK = {
       desc: "La Santa Biblia is an editorial photo novel that follows a young girl as she uncovers the hidden secrets of her deeply ultra-Catholic family. The project combines photography, editorial design, and layout to create a visual narrative that reinforces the story's atmosphere of mystery and tension.",
       titleL: 3.61, titleT: 14.45, titleV: false,
       numL: 29, numT: 17.8,
-      descL: 6.0, descT: 30.88, descW: 18,
+      descL: 4.3, descT: 30.88, descW: 18,
       images: [
         { src: "img/proyecto-fotonovela/foto-libro2.png", l: 3.61,  t: 15.16, w: 23.12, r: 0 },
         { src: "img/proyecto-fotonovela/foto-libro1.png", l: 11.88, t: 20.26, w: 30.56, r: 0 },
@@ -152,7 +152,7 @@ const WORK = {
       desc: "A typographic specimen that reinterprets the Clarendon typeface from a contemporary perspective. Through dynamic compositions, visual hierarchies, and the use of color, the project explores the expressive potential of the typeface while demonstrating its application in modern design.",
       titleL: 51.7, titleT: 25.89, titleV: true,
       numL: 86, numT: 28.56,
-      descL: 57, descT: 31.55, descW: 18, descR: -5.3,
+      descL: 55.5, descT: 31.55, descW: 18, descR: -5.3,
       images: [
         { src: "img/proyecto-muestra/Screen Recording 2026-07-07 at 15.11.28.gif", l: 53.96, t: 25.89, w: 29.79, r: -5.3 },
       ],
@@ -172,7 +172,7 @@ const WORK = {
     {
       n: "(06)", title: "Editorial Reinterpretation of The Pritzker Architecture Prize", anchors: ["proj-4"],
       desc: "An editorial redesign inspired by Frank Gehry's innovative architectural approach. The book transforms reading into an interactive experience through folds, varied page formats, and an unconventional structure that encourages readers to discover the content, translating the architect's experimental and groundbreaking vision into editorial design.",
-      titleL: 31.3, titleT: 42.26, titleV: true,
+      titleL: -1.47, titleT: 42.26, titleV: true,
       numL: 28.2, numT: 48.95,
       descL: 0.8, descT: 49.48, descW: 18,
       images: [
@@ -196,7 +196,7 @@ const WORK = {
       n: "(08)", title: "Filmoteca de Catalunya Visual Identity Redesign", anchors: ["proj-9"],
       desc: "A visual identity redesign for the Filmoteca de Catalunya inspired by the cyanotype process. The project translates the handcrafted, organic, and timeless qualities of this historic photographic technique into a complete visual system, applied across the logo, posters, social media, and digital platforms. Combining the distinctive blue tones of cyanotype with a contemporary aesthetic, the identity celebrates the preservation and heritage of cinema.",
       titleL: 14.54, titleT: 67.07, titleV: true,
-      numL: 86.9, numT: 75.54,
+      numL: 86.9, numT: 77.5,
       descL: 57.5, descT: 79.47, descW: 18,
       images: [
         { src: "img/proyecto-filmoteca/filmo1-web.jpg",      l: 57.5, t: 73.12, w: 27.08, r: 0 },
@@ -208,7 +208,7 @@ const WORK = {
       n: "(09)", title: "Personal Projects", anchors: ["proj-5", "proj-7"],
       desc: "Alongside graphic design, I enjoy exploring other forms of artistic expression through personal projects. Painting and experimenting with handcrafted techniques, such as tapestry, allow me to develop new ideas, work with different materials, and nurture my creativity through a more hands-on approach.",
       titleL: 41.2, titleT: 86.01, titleV: true,
-      numL: 83.7, numT: 88.26,
+      numL: 83.7, numT: 90.5,
       descL: 75.5, descT: 96.9, descW: 18,
       images: [
         { src: "img/proyecto-cuadro1/cuadro-web.jpg", l: 43.47, t: 86.01, w: 37.92, r: 0 },
