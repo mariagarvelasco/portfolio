@@ -255,10 +255,15 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 .work-piece {
   position: absolute; display: block; margin: 0;
   transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(calc(var(--r, 0deg) + var(--tilt, 0deg)));
-  transition: transform .5s var(--ease), filter .5s var(--ease); transform-origin: 50% 50%;
+  /* opacity gets its own duration + per-item delay (the scroll reveal) so the
+     hover/drag transform and filter keep responding instantly */
+  transition: transform .5s var(--ease), filter .5s var(--ease), opacity 0.9s var(--ease) var(--rvd, 0ms);
+  transform-origin: 50% 50%;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18)) drop-shadow(0 14px 22px rgba(0,0,0,0.14));
   z-index: 1; touch-action: none; cursor: grab;
+  opacity: 0;
 }
+.work-piece.in { opacity: 1; }
 .work-piece img { width: 100%; height: auto; display: block; pointer-events: none; }
 .work-piece:hover { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(0deg) scale(1.04); z-index: 5; }
 .work-piece--flat { filter: none; }
@@ -295,7 +300,9 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 .work-circle {
   position: absolute; z-index: 1; display: block; width: 1.944%; aspect-ratio: 1;
   border-radius: 50%; overflow: hidden; pointer-events: none;
+  opacity: 0; transition: opacity 0.9s var(--ease) var(--rvd, 0ms);
 }
+.work-circle.in { opacity: 1; }
 .work-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .work-logo-bg {
@@ -657,7 +664,11 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
 .ql-item {
   position: absolute; display: block;
   transform: translate(var(--sx, 0px), var(--sy, 0px));
+  /* photos fade in softly the first time they scroll into view — the delay
+     is per-item (set from JS) so neighbours cascade instead of popping together */
+  opacity: 0; transition: opacity 0.9s var(--ease) var(--rvd, 0ms);
 }
+.ql-item.in { opacity: 1; }
 /* inner image: the resting tilt + hover flatten/scale, exactly as before,
    split out so the hover polish keeps its own smooth easing independent of scroll */
 .ql-item img {
