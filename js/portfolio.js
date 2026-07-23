@@ -139,7 +139,7 @@ const WORK = {
       n: "(03)", title: "La Santa Biblia", anchors: ["proj-8"],
       desc: "La Santa Biblia is an editorial photo novel that follows a young girl as she uncovers the hidden secrets of her deeply ultra-Catholic family. The project combines photography, editorial design, and layout to create a visual narrative that reinforces the story's atmosphere of mystery and tension.",
       titleL: 3.61, titleT: 14.45, titleV: false,
-      numL: 29, numT: 17.8,
+      numL: 29, numT: 18.1,
       descL: 4.3, descT: 30.88, descW: 18,
       images: [
         { src: "img/proyecto-fotonovela/foto-libro2.png", l: 3.61,  t: 15.16, w: 23.12, r: 0 },
@@ -183,7 +183,7 @@ const WORK = {
       n: "(07)", title: "Lift Your Eyes", anchors: ["proj-3"],
       desc: "An awareness campaign addressing thumb scrolling addiction and excessive social media consumption. The project develops a visual identity across posters, videos, and digital advertisements, encouraging viewers to reflect on the time they spend on their screens. Through the message “Lift your eyes. The world's still right here.”, the campaign invites people to reconnect with the world around them.",
       titleL: 22.5, titleT: 51.26, titleV: true,
-      numL: 96.9, numT: 59.2,
+      numL: 96.9, numT: 58.5,
       descL: 17.92, descT: 62.16, descW: 18,
       images: [
         { src: "img/proyecto-socialmedia/mockup mobil.jpg",       l: 24.79, t: 51.26, w: 28.19, r: 0 },
