@@ -170,9 +170,9 @@ const WORK = {
       ],
     },
     {
-      n: "(06)", title: "Editorial Reinterpretation of The Pritzker Architecture Prize", anchors: ["proj-4"],
+      n: "(06)", title: "Editorial Reinterpretation of\nThe Pritzker Architecture Prize", anchors: ["proj-4"],
       desc: "An editorial redesign inspired by Frank Gehry's innovative architectural approach. The book transforms reading into an interactive experience through folds, varied page formats, and an unconventional structure that encourages readers to discover the content, translating the architect's experimental and groundbreaking vision into editorial design.",
-      titleL: -1.47, titleT: 42.26, titleV: true,
+      titleL: -2.65, titleT: 40.8, titleV: true,
       numL: 28.2, numT: 48.95,
       descL: 0.8, descT: 49.48, descW: 18,
       images: [
@@ -193,9 +193,9 @@ const WORK = {
       ],
     },
     {
-      n: "(08)", title: "Filmoteca de Catalunya Visual Identity Redesign", anchors: ["proj-9"],
+      n: "(08)", title: "Filmoteca de Catalunya\nVisual Identity Redesign", anchors: ["proj-9"],
       desc: "A visual identity redesign for the Filmoteca de Catalunya inspired by the cyanotype process. The project translates the handcrafted, organic, and timeless qualities of this historic photographic technique into a complete visual system, applied across the logo, posters, social media, and digital platforms. Combining the distinctive blue tones of cyanotype with a contemporary aesthetic, the identity celebrates the preservation and heritage of cinema.",
-      titleL: 14.54, titleT: 67.07, titleV: true,
+      titleL: 13.36, titleT: 67.07, titleV: true,
       numL: 86.9, numT: 77.5,
       descL: 57.5, descT: 79.47, descW: 18,
       images: [
