@@ -356,7 +356,7 @@ h1, h2, h3 { font-family: var(--font); font-weight: 700; line-height: 1; margin:
   opacity: 0.4;
 }
 .contact-mark-wrap { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto; }
-.contact-mark { width: clamp(120px, 14vw, 200px); margin-bottom: clamp(4px, 0.8vh, 10px); }
+.contact-mark { width: clamp(120px, 14vw, 200px); margin-bottom: clamp(4px, 0.8vh, 10px); margin-left: -18px; }
 .contact-inner {
   position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto;
   display: grid; grid-template-columns: 1.3fr 1fr; grid-template-areas: "title title" "sub cta"; gap: clamp(20px,4vh,40px) 40px; align-items: end;
